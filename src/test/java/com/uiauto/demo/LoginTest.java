@@ -34,7 +34,8 @@ public class LoginTest {
 
     @Test(priority = 2)
     public void verifyLoginWithInvalidUnAndValidPW() throws InterruptedException {
-
+        String userNameStr = "test_user";
+        String passwordStr = "secret_sauce";
 
         WebDriver driver = new ChromeDriver();
         driver.get(uri);
@@ -42,6 +43,7 @@ public class LoginTest {
         Thread.sleep(5000);
 
         LoginPage loginPage = new LoginPage(driver);
+        loginPage.login(userNameStr, passwordStr);
 
 
         Thread.sleep(5000);
@@ -52,31 +54,40 @@ public class LoginTest {
 
     @Test(priority = 3)
     public void verifyLoginWithValidUnAndInvalidPW() throws InterruptedException {
+        String userNameStr = "standard_user";
+        String passwordStr = "wrong_password";
 
         WebDriver driver = new ChromeDriver();
         driver.get(uri);
         driver.manage().window().maximize();
         Thread.sleep(5000);
 
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login(userNameStr, passwordStr);
 
 
         Thread.sleep(5000);
-
+        Assert.assertTrue(loginPage.invalidLogin(), "User successfully logged into the system");
 
         driver.quit();
     }
 
     @Test(priority = 4)
     public void verifyLoginWithInvalidUnAndInvalidPW() throws InterruptedException {
+        String userNameStr = "test_user";
+        String passwordStr = "wrong_password";
 
         WebDriver driver = new ChromeDriver();
         driver.get(uri);
         driver.manage().window().maximize();
         Thread.sleep(5000);
 
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login(userNameStr, passwordStr);
 
 
         Thread.sleep(5000);
+        Assert.assertTrue(loginPage.invalidLogin(), "User successfully logged into the system");
 
 
         driver.quit();
@@ -84,15 +95,21 @@ public class LoginTest {
 
     @Test(priority = 5)
     public void verifyLoginWithEmptyUnAndEmptyPW() throws InterruptedException {
+        String userNameStr = "";
+        String passwordStr = "";
 
         WebDriver driver = new ChromeDriver();
         driver.get(uri);
         driver.manage().window().maximize();
         Thread.sleep(5000);
 
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login(userNameStr, passwordStr);
 
 
         Thread.sleep(5000);
+
+        Assert.assertTrue(loginPage.invalidLogin(), "User successfully logged into the system");
 
 
         driver.quit();

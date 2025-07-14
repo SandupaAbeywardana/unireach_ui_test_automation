@@ -13,8 +13,8 @@ public class LoginPage {
     }
 
     public void login(String userNameStr, String passwordStr) throws InterruptedException {
-        WebElement userName = driver.findElement(By.xpath(""));
-        WebElement password = driver.findElement(By.xpath(""));
+        WebElement userName = driver.findElement(By.xpath("//input[@id='user-name']"));
+        WebElement password = driver.findElement(By.xpath("//input[@id='password']"));
         WebElement submitButton = driver.findElement(By.id("login-button"));
 
         userName.sendKeys(userNameStr);
